@@ -1,0 +1,79 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_production_deployment:
+        description: 'Type "CONFIRM" to deploy to production'
+        required: true
+        default: ''
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate-input:
+    name: Validate Input
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.check.outputs.deploy }}
+    
+    steps:
+      - name: Check confirmation
+        id: check
+        run: |
+          if [ "${{ github.event.inputs.confirm_production_deployment }}" = "CONFIRM" ]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "❌ Production deployment not confirmed. Please type 'CONFIRM' to proceed."
+            exit 1
+          fi
+
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    needs: validate-input
+    if: needs.validate-input.outputs.deploy == 'true'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ~1.0
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          cd infrastructure
+          terraform init -backend-config="resource_group_name=observer-tfstate-rg" \
+                         -backend-config="storage_account_name=observertfstate" \
+                         -backend-config="container_name=tfstate" \
+                         -backend-config="key=production.terraform.tfstate"
+
+      - name: Terraform Plan
+        run: |
+          cd infrastructure
+          terraform plan -var-file="environments/production.tfvars" -out=production.tfplan
+
+      - name: Terraform Apply
+        run: |
+          cd infrastructure
+          terraform apply production.tfplan
+
+      - name: Output Infrastructure Details
+        run: |
+          cd infrastructure
+          echo "## Production Infrastructure Deployed" >> $GITHUB_STEP_SUMMARY
+          terraform output -json | jq -r 'to_entries[] | "- **\(.key)**: \(.value.value)"' >> $GITHUB_STEP_SUMMARY
