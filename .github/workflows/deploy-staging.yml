@@ -1,0 +1,57 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infrastructure/**'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ~1.0
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: |
+          cd infrastructure
+          terraform init -backend-config="resource_group_name=observer-tfstate-rg" \
+                         -backend-config="storage_account_name=observertfstate" \
+                         -backend-config="container_name=tfstate" \
+                         -backend-config="key=staging.terraform.tfstate"
+
+      - name: Terraform Plan
+        run: |
+          cd infrastructure
+          terraform plan -var-file="environments/staging.tfvars" -out=staging.tfplan
+
+      - name: Terraform Apply
+        run: |
+          cd infrastructure
+          terraform apply staging.tfplan
+
+      - name: Output Infrastructure Details
+        run: |
+          cd infrastructure
+          echo "## Staging Infrastructure Deployed" >> $GITHUB_STEP_SUMMARY
+          terraform output -json | jq -r 'to_entries[] | "- **\(.key)**: \(.value.value)"' >> $GITHUB_STEP_SUMMARY
