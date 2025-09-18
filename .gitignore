@@ -1,8 +1,6 @@
 # Terraform
 *.tfstate
 *.tfstate.*
-*.tfvars
-*.tfvars.json
 .terraform/
 
 # Terraform lock file - include this in version control for production
