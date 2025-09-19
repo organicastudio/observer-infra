@@ -21,16 +21,21 @@ Follow standard infrastructure deployment practices. No emoji or non-standard ch
 
 ## 1. TLS Certificate
 
-- Check that the Key Vault secret exists:
+- Ensure the Key Vault secret exists:
   - Vault: `kv-observer-prod-we-001`
   - Secret Name: `observer-tls-cert`
   - Use "latest" version for AppGW listener
 
+> **Note:**  
+> The certificate must be stored as a secret named `observer-tls-cert` in the Key Vault `kv-observer-prod-we-001`.  
+> When configuring the Application Gateway listener, reference the "latest" version of this secret to ensure you use the most current certificate.
+
 ## 2. DNS Records
 
-- Set A records for:
+- Create A records for:
   - `observer-api.internal` → AppGW private IP (e.g. `10.10.10.X`)
   - `observer-admin.internal` → AppGW private IP (e.g. `10.10.10.X`)
+
 - Example (Azure CLI):
   ```sh
   az network private-dns record-set a add-record \
@@ -42,14 +47,14 @@ Follow standard infrastructure deployment practices. No emoji or non-standard ch
 
 ## 3. App Gateway Health Probes
 
-- In Azure Portal, go to the App Gateway backend pool
-- Check health probe for `observer-brain-api` is green
+- In Azure Portal, navigate to the App Gateway backend pool
+- Confirm health probe for `observer-brain-api` is green
 - If not, review probe configuration and backend health
 
 ## 4. AKS AGIC Integration
 
-- Confirm AGIC is enabled in Bicep
-- AGIC is mapped to the internal AppGW resource
+- AGIC enabled in Bicep
+- AGIC mapped to the internal AppGW resource
 - Minimal Ingress objects in Kubernetes; AGIC syncs to AppGW
 
 ## 5. Test Access
