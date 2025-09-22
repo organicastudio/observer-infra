@@ -21,14 +21,14 @@ Follow standard infrastructure deployment practices. No emoji or non-standard ch
 
 ## 1. TLS Certificate
 
-- Ensure the Key Vault secret exists:
+- Verify the Key Vault secret:
   - Vault: `kv-observer-prod-we-001`
-  - Secret Name: `observer-tls-cert`
-  - Use "latest" version for AppGW listener
+  - Secret name: `observer-tls-cert`
+  - Reference the "latest" version for the AppGW listener
 
 > **Note:**  
-> The certificate must be stored as a secret named `observer-tls-cert` in the Key Vault `kv-observer-prod-we-001`.  
-> When configuring the Application Gateway listener, reference the "latest" version of this secret to ensure you use the most current certificate.
+> Store the TLS certificate as a secret named `observer-tls-cert` in the Key Vault `kv-observer-prod-we-001`.  
+> When configuring the Application Gateway listener, always reference the "latest" version of this secret to ensure the most current certificate is used.
 
 ## 2. DNS Records
 
@@ -44,18 +44,24 @@ Follow standard infrastructure deployment practices. No emoji or non-standard ch
     --record-set-name observer-api \
     --ipv4-address 10.10.10.X
   ```
+  - `--zone-name observer.internal`: The DNS zone to update.
+  - `--resource-group <rg>`: The resource group containing the DNS zone.
+  - `--record-set-name observer-api`: The name of the A record.
+  - `--ipv4-address 10.10.10.X`: The private IP address of the App Gateway.
+
+Replace `<rg>` with your resource group and `10.10.10.X` with your AppGW private IP.
 
 ## 3. App Gateway Health Probes
 
-- In Azure Portal, navigate to the App Gateway backend pool
-- Confirm health probe for `observer-brain-api` is green
-- If not, review probe configuration and backend health
+- In Azure Portal, navigate to the App Gateway backend pool.
+- Confirm the health probe for `observer-brain-api` is green.
+- If not, review the probe configuration and backend health.
 
 ## 4. AKS AGIC Integration
 
-- AGIC enabled in Bicep
-- AGIC mapped to the internal AppGW resource
-- Minimal Ingress objects in Kubernetes; AGIC syncs to AppGW
+- Ensure AGIC is enabled in Bicep.
+- Map AGIC to the internal AppGW resource.
+- Use minimal Ingress objects in Kubernetes; AGIC syncs to AppGW.
 
 ## 5. Test Access
 
@@ -63,13 +69,13 @@ Follow standard infrastructure deployment practices. No emoji or non-standard ch
   ```sh
   curl -vk https://observer-api.internal/health/ready
   ```
-  - Should return HTTP 200 OK and valid TLS
+  - Should return HTTP 200 OK and valid TLS.
 
 ## Troubleshooting
 
-- **TLS errors**: Check Key Vault access policies and secret version in listener config
-- **DNS issues**: Ensure A records match AppGW private IP and domain
-- **Probe failures**: Verify backend targets are reachable and healthy
+- **TLS errors:** Check Key Vault access policies and secret version in listener config.
+- **DNS issues:** Ensure A records match AppGW private IP and domain.
+- **Probe failures:** Verify backend targets are reachable and healthy.
 
 ---
 
