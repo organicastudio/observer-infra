@@ -1,0 +1,16 @@
+## Slack Bot Token Verification
+
+To verify your Slack bot token, run:
+
+```sh
+curl -sS -H "Authorization: Bearer xoxb-REDACTED" https://slack.com/api/auth.test
+```
+
+**Expected output:**
+- Should include: `{"ok":true, ...}`
+
+**Troubleshooting if not `ok:true`:**
+- **Invalid auth:** Ensure you used a bot token (`xoxb-…`) with the correct scopes.
+- **Expired/rotated:** Pull the latest token from `vault://linkboutique/slack`.
+- **Network issues:** Retry or test from a different network.
+- **App not installed to workspace:** Reinstall via [Slack App Management](https://app.slack.com/client/T04SUHGA5AT) and retry.
