@@ -1,0 +1,40 @@
+Organelle
+└─ Molecule
+    └─ Atom
+        └─ Hadron
+           └─ Electron
+              └─ Quark
+                 └─ Gluon
+                    └─ String
+
+Apply manifests using kubectl:
+
+`Organelle
+└─ Molecule
+    └─ Atom
+        └─ Hadron
+           └─ Electron
+              └─ Quark
+                 └─ Gluon
+                    └─ String
+
+Apply manifests using kubectl:
+
+```sh
+kubectl apply -f <manifest-file>
+```
+```
+Organelle
+└─ Molecule
+    └─ Atom
+        └─ Hadron
+           └─ Electron
+              └─ Quark
+                 └─ Gluon
+                    └─ String
+
+Apply manifests using kubectl:
+
+```sh
+kubectl apply -f <manifest-file>
+```

@@ -1,0 +1,57 @@
+# Document Heading
+
+This is a document with a top-level heading
+
+## Installation Instructions
+
+Follow these steps to integrate the Inner → Outward component with your Entropy tokens:
+
+### 1. Data Setup
+
+Ensure you have the following data files in your project structure:
+
+- `data/entropy_color_tokens.json` — Contains your colour token definitions
+- `data/entropy_glyph_registry.normalized.json` — Contains your normalised glyph registry
+
+### Backend Setup
+
+- Navigate to your project directory
+- Install backend dependencies: `pip install -r backend/requirements.txt`
+- Start the FastAPI server: `uvicorn backend.main:app --reload --port 8000`
+
+### Frontend Integration
+
+- Copy `EntropyInnerOutwardIntegrated.jsx` to your React project
+- Import and mount the component in your application
+- Configure your API proxy to forward `/tokens/*` and `/simulate/*` routes to the FastAPI backend
+
+### Verifying the Setup
+
+Test the installation by:
+
+- Checking that colour tokens are correctly applied as CSS variables
+- Confirming the pendulum animation renders properly
+- Verifying that glyphs from your registry appear in the preview panel
+
+## Troubleshooting
+
+- If tokens don't appear, check that your JSON files are properly formatted and accessible.
+- For pendulum simulation issues, verify the backend server is running.
+- For styling problems, inspect the CSS variables in your browser's developer tools.
+
+For additional support, refer to the documentation or contact the Entropy team.
+
+Organelle
+└─ Molecule
+    └─ Atom
+        └─ Hadron
+           └─ Electron
+              └─ Quark
+                 └─ Gluon
+                    └─ String
+
+Apply manifests using kubectl:
+
+```sh
+kubectl apply -f <manifest-file>
+```

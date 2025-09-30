@@ -1,0 +1,65 @@
+# Document Heading
+
+This is a document with a top-level heading
+
+## Installation Instructions
+
+### 1. Prepare Your Data Files
+
+Ensure you have the following data files in your project structure:
+
+- `data/entropy_color_tokens.json` — Contains your colour token definitions
+- `data/entropy_glyph_registry.normalized.json` — Contains your normalised glyph registry
+
+### 2. Backend Setup
+
+- Install the required Python dependencies:
+  ```sh
+  pip install -r backend/requirements.txt
+  ```
+- Start the FastAPI server:
+  ```sh
+  uvicorn backend.main:app --reload --port 8000
+  ```
+
+### 3. Frontend Integration
+
+- Copy `EntropyInnerOutwardIntegrated.jsx` to your React project
+- Import and mount the component in your application:
+  ```jsx
+  import EntropyInnerOutwardIntegrated from './path/to/EntropyInnerOutwardIntegrated';
+
+  function App() {
+    return (
+      <div className="app">
+        <EntropyInnerOutwardIntegrated />
+      </div>
+    );
+  }
+  ```
+- Configure your API proxy to forward `/tokens/*` and `/simulate/*` routes to the FastAPI backend:
+  ```js
+  // In your proxy configuration (e.g., vite.config.js, next.config.js)
+  {
+    proxy: {
+      '/tokens': 'http://localhost:8000',
+      '/simulate': 'http://localhost:8000'
+    }
+  }
+  ```
+
+### 4. Verifying the Setup
+
+Test the installation by:
+
+- Checking that colour tokens are correctly applied as CSS variables
+- Confirming the pendulum animation renders properly
+- Verifying that glyphs from your registry appear in the preview panel
+
+## Troubleshooting
+
+- If tokens don't appear, check that your JSON files are properly formatted and accessible
+- For pendulum simulation issues, verify the backend server is running
+- For styling problems, inspect the CSS variables in your browser's developer tools
+
+For additional support, refer to the documentation or contact the Entropy team.

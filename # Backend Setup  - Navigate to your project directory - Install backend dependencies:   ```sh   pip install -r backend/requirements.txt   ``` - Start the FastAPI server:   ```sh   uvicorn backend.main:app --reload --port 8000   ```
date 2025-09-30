@@ -1,48 +1,34 @@
-# Kubernetes Configuration
+### 1. Data Setup
 
-## Project Structure
-
-Our Kubernetes infrastructure follows a hierarchical structure:
-
-Organelle  
-└─ Molecule  
-    └─ Atom  
-        └─ Hadron  
-            └─ Electron  
-                └─ Quark  
-                    └─ Gluon  
-                        └─ String
-
-## Quick Start
-
-Apply manifests using kubectl:
-
-```sh
-kubectl apply -f <manifest-file>
-```
-
-## Installation Instructions
-
-Ensure you have the following data files in your project structure (create or download as needed):
+Ensure you have the following data files in your project structure:
 
 - `data/entropy_color_tokens.json` — Contains your colour token definitions
 - `data/entropy_glyph_registry.normalized.json` — Contains your normalised glyph registry
 
-### Backend Setup
-// ...existing code...
+### 2. Backend Setup
 
-### Frontend Integration
+- Navigate to your project directory
+- Install backend dependencies: `pip install -r backend/requirements.txt`
+- Start the FastAPI server: `uvicorn backend.main:app --reload --port 8000`
+
+### 3. Frontend Integration
 
 - Copy `EntropyInnerOutwardIntegrated.jsx` to your React project
 - Import and mount the component in your application
 - Configure your API proxy to forward `/tokens/*` and `/simulate/*` routes to the FastAPI backend
 
-### Verifying the Setup
+### 4. Verifying the Setup
 
 Test the installation by:
 
 - Checking that colour tokens are correctly applied as CSS variables
 - Confirming the pendulum animation renders properly
 - Verifying that glyphs from your registry appear in the preview panel
+
+## Troubleshooting
+
+- If tokens don't appear, check that your JSON files are properly formatted and accessible
+- For pendulum simulation issues, verify the backend server is running
+- For styling problems, inspect the CSS variables in your browser's developer tools
 
 For additional support, refer to the documentation or contact the Entropy team.
