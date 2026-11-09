@@ -1,0 +1,16 @@
+{
+  "id":"PUDS_PM2_DAiMAC.INTEGRATION.CANDIDATE.v1",
+  "parent":"PUDS_PM2_DAiMAC.PRODUCTION.STACK.v1",
+  "canonicalWrite":false,
+  "sourceDate":"2026-11-09",
+  "pageFlow":["HeroInteractiveTypography","ProjectIndexGrid","CaseStudyScrollRail","ServiceSignalPanel","CTAConversionDock","FooterDataSpine"],
+  "contracts":{"hero":"PUDS.HERO.INTERACTIVE.TYPOGRAPHY.v1","heroKnowledgeAtom":"KA-PUDS-001","heroGovernance":"PUDS.HERO.INTERACTIVE.TYPOGRAPHY.GOV.v1","registry":"PM2.COMPONENT.TABLE.v1","registryData":"PM2.COMPONENT.TABLE.DATA.v1","shader":"PM2.SHADER.FRAGMENT.HEADER.v1","cases":"PUDS.CASE.STUDY.SCROLL.RAIL.v1","caseFreezeRules":"PUDS.CASE.STUDY.SCROLL.RAIL.FREEZE.RULES.v1","evaluation":"DAiMAC.PRODUCTION.STATE.v1"},
+  "dimensions":["Design","Architecture","Interaction","Metrics","Automation","Conversion"],
+  "semanticSeparation":{"runtimeState":"IDLE/ACTIVE/OVERDRIVE/FAULT/FROZEN","validationStatus":"INCOMPLETE/PASSED/FAILED","evidenceStatus":"FIXTURE/UNVERIFIED/VERIFIED","acceptance":"NOT_GRANTED unless separately decided","release":"HELD until separately authorized"},
+  "tokens":{"puds":{"background":"--puds-bg","ink":"--puds-ink","accent":"--puds-accent"},"pm2":{"background":"--pm2-bg-brutal","active":"--pm2-triad-primary","fault":"--pm2-triad-tensor","datum":"--pm2-triad-datum"},"bridge":{"surface":"--sys-bg","text":"--sys-ink","accent":"--sys-accent","focus":"--sys-focus"}},
+  "scores":{"maturity":0.84,"confidence":0.86,"basis":"HISTORICAL_ESTIMATE","measuredCompletion":null,"independentVerification":"NOT_PERFORMED"},
+  "authorityEffect":"NONE",
+  "deploymentAuthorized":false,
+  "acceptance":"NOT_GRANTED",
+  "release":"HELD"
+}
