@@ -1,64 +1,45 @@
 # PUDS × PM2 × DAiMAC — semantic integration candidate
 
-Execution date: 2026-11-09. Reference to “yesterday” means 2026-11-08, not a backdated deployment.
-
-This is a static frontend integration. It implements the six-section PUDS flow, PM2 registry surface and DAiMAC evidence boundary using local, explicitly labelled implementation fixtures. No client outcome, commercial metric, signed decision or live telemetry is invented. The historical 0.84/0.86 figures remain labelled estimates.
+Executed on 2026-11-09. “Yesterday” refers to 2026-11-08; no deployment is backdated.
 
 ## Run
 
-Requires Node.js 22+ for tests/build, and Python 3 for the optional local server. Runtime has no package dependencies.
+Node.js 22+; Python 3 for the optional local server. No runtime package dependencies.
 
 ```sh
 npm test
 npm run build
 npm start
-# Open http://127.0.0.1:4173/ on your own machine.
-# Or open dist/puds-pm2-daimac.html directly without a server.
+# Local server: http://127.0.0.1:4173/
+# Or open dist/puds-pm2-daimac.html without a server.
 ```
 
-Browser tests require Python Playwright and Chromium. `tests/browser.py` uses `/usr/bin/chromium`, an in-memory standalone document, and local downloads; adjust the browser executable only to your installed path. It is not a hosted test. The environment used for this run blocks HTTP browser navigation and does not expose WebGL.
+Browser tests require Python Playwright and Chromium. `python tests/browser.py` uses `/usr/bin/chromium` and an in-memory standalone document; adapt the executable path to your installation. This run's browser environment blocked HTTP navigation and exposed no WebGL.
 
-## Changes
+## Implemented
 
-- Shared primitive/semantic/component aliases: PUDS paper/teal and PM2 dark/phosphor.
-- Canonical PUDS, PM2 and DAiMAC identifiers preserved; legacy namespace prefix checker retained separately from strict identifier validation.
-- Hero uses stable outer character slots and transforms only inner characters. Zero-distance and outside-radius cases are bounded. Pointer work is frame-coalesced and motion is disabled for reduced motion, touch, explicit opt-out, hidden documents and blur. Resize and font changes refresh measurements.
-- Project index has keyboard-native filter buttons and announced result counts.
-- Case-study rail has keyboard navigation, previous/next, list mode, mobile vertical layout and safe text rendering. Missing/invalid cases are visible in quarantine rather than silently treated as valid.
-- Service selection updates a local brief generator. The CTA produces a real local JSON download, not a fake booking or external submission.
-- Registry exposes contract details without confusing runtime state, specification, implementation, risk and acceptance.
-- Validators reject nulls, missing/blank fields, invalid types, unsupported enums, duplicate identifiers and unsafe routes.
-- Client-side validation NEVER authorizes production. Missing evidence remains incomplete, failed evidence freezes, valid evidence can only establish local eligibility.
-- Optional WebGL1 dither study has a static CSS fallback. It is not physically based refraction.
+The complete six-section PUDS page flow, PM2 registry and DAiMAC evidence boundary are integrated with labelled local fixtures. PUDS paper/teal and PM2 dark/phosphor use shared semantic aliases without replacing their namespaces.
 
-## Executed evidence
+The hero measures stable character slots and transforms only the inner characters. Frame-coalesced pointer handling includes bounded geometry, reduced-motion changes, touch fallback, explicit opt-out, hidden-document/blur resets, resize/font refresh and lifecycle cleanup.
 
-112/112 Node contract tests passed. 41/41 Chromium interaction/layout/accessibility-smoke checks passed. No JavaScript exceptions and no specimen network requests were observed. Viewport widths tested: 320, 390, 768, 1024 and 1440 pixels. A 200% root-text-size check passed. These checks do not constitute a complete WCAG audit or real-device verification.
+Project filters announce counts. The case-study rail provides keyboard navigation, list mode and a vertical mobile layout. Invalid cases are quarantined. Service selection feeds a real local JSON brief download; nothing is sent or booked. Registry details separate runtime state, risk, specification, implementation and acceptance.
 
-The initial signed-zero unit failure was fixed. The initial browser outline check used mouse modality; the test now establishes keyboard modality explicitly. WebGL unavailability is reported as NOT_PERFORMED for compilation; only the fallback behavior passed. Original failed-run receipts are retained in the archive.
+Contracts reject missing/blank fields, null inputs, invalid types/enums, duplicate identifiers and unsafe routes. The legacy PM2 prefix check is retained separately from the strict identifier validator. Unknown evidence is incomplete; failed evidence freezes. Browser-side checks never authorize release. The optional WebGL dither study has a static fallback and is not physically based refraction.
 
-The build generates `evidence/source-manifest.json` with SHA-256 digests. Browser evidence binds the standalone HTML digest. Test receipts are tool-observed local execution, not independent assurance.
+## Evidence
 
-## Remaining gates
+Final result: **114/114 Node contract tests and 41/41 Chromium smoke checks passed.** No JavaScript exceptions or specimen network requests were observed. Viewports: 320, 390, 768, 1024 and 1440 pixels. A 200% root-text-size check passed.
 
-- Actual WebGL compilation/link/draw on a supported target.
-- Real Safari/iOS/Firefox and assistive-technology checks; full contrast/accessibility review.
-- Interaction-load performance profiling on target devices (idle frame timing is not a smoothness acceptance test).
-- Reviewer acceptance and an explicit version/scope-bound release decision.
-- A reachable authorized hosting target and hosted smoke verification.
-- OIDC/JWKS, tenant isolation and RLS for any future live-data attachment. None is attached here.
+`evidence/execution-receipt.json`, `browser-report.json` and `source-manifest.json` bind the observations to source and standalone SHA-256 digests. The archive additionally retains raw TAP output, screenshots and initial failed-run evidence. Source tests are reproducible locally; they were not run in GitHub Actions.
 
-## Integration boundary
+The signed-zero motion reset was corrected. The outline test now establishes keyboard modality instead of assuming it after a mouse click. Missing-report and null-options regression checks were added. WebGL fallback passed; shader compilation remains NOT_PERFORMED. Idle frame timing is not interaction-load acceptance.
 
-Additive subdirectory under `candidate/adsl/puds-pm2/` on the existing nonproduction candidate branch. No existing production infrastructure, authentication, database, secrets or CI/CD files are changed. No external canonical registry is promoted. No release hold is lifted.
+## Boundaries and remaining work
 
-The connected Lovable workspace call returned an OAuth 403 during this run. Vercel was discoverable but not connected. Therefore no hosted deployment is claimed.
+This is an additive static-frontend candidate under `candidate/adsl/puds-pm2/`. Existing infrastructure, original laboratory, authentication, databases, secrets, CI/CD and main branch are unchanged. No client outcomes or live telemetry are fabricated. Historical maturity 0.84 and confidence 0.86 remain estimates.
 
-## Reference standards used
+Outstanding: real WebGL target compilation; Safari/iOS/Firefox and assistive-technology checks; full contrast/accessibility review; target-device performance; independent review and scope-bound release decision; authorized hosting and hosted smoke tests. OIDC/JWKS and tenant RLS are required before any future live-data attachment, but none is attached here.
 
-- W3C WCAG 2.2, Understanding Animation from Interactions: https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions
-- MDN prefers-reduced-motion: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion
-- MDN getBoundingClientRect: https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-- MDN CSS Scroll Snap: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll_snap
+Lovable workspace access returned OAuth 403. Vercel was discoverable but not connected. Hosted deployment was NOT_PERFORMED. Acceptance is NOT_GRANTED; release is HELD. No canonical external registry was promoted.
 
-Standards informed implementation; citing them does not certify compliance.
+Implementation references: W3C WCAG 2.2 Animation from Interactions, and MDN prefers-reduced-motion, getBoundingClientRect and CSS Scroll Snap documentation. These informed the code; they do not certify conformance.

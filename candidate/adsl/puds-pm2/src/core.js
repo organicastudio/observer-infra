@@ -68,7 +68,7 @@
     return verdict(errors);
   }
   function validateHero(report) {
-    if (!isRecord(report)) return { ...verdict(['report: object required']), pass: null, validationStatus: 'INCOMPLETE' };
+    if (!isRecord(report)) return { pass: null, failures: [], missing: ['report'], validationStatus: 'INCOMPLETE', exportStatus: 'Production Candidate', reviewRequired: true, deploymentAuthorized: false };
     const failures = [], missing = [];
     const requirements = { causesLayoutShift: false, interactionSmoothness: 'smooth', respectsReducedMotion: true, hasMobileFallback: true };
     for (const [key, expected] of Object.entries(requirements)) {
@@ -96,7 +96,7 @@
   }
   function kinematics(x, y, cx, cy, options = {}) {
     if (![x, y, cx, cy].every(finite)) return { x: 0, y: 0, scale: 1, rotate: 0, power: 0 };
-    const radius = finite(options.radius) && options.radius > 0 ? options.radius : 250;
+    const radius = isRecord(options) && finite(options.radius) && options.radius > 0 ? options.radius : 250;
     const dx = x - cx, dy = y - cy, distance = Math.hypot(dx, dy);
     const power = Math.max(0, 1 - distance / radius), divisor = Math.max(distance, 0.001);
     if (power === 0) return { x: 0, y: 0, scale: 1, rotate: 0, power: 0 };
