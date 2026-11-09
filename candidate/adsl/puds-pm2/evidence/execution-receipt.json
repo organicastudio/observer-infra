@@ -1,0 +1,31 @@
+{
+  "record": "PUDS_PM2_DAiMAC.EXECUTION.RECEIPT.v1",
+  "executedAt": "2026-11-09T11:36:22.392238+00:00",
+  "sourceDigest": "25640d92743c73241cd6f5ec8b482a074cae97ec4267f5b605df2a5e13bc07f9",
+  "standaloneSha256": "c8382479dbf1451e8ac9fc4130646136206d4ae77e7e3f3f58708864d49e6368",
+  "baseRepository": "organicastudio/observer-infra",
+  "baseCommit": "5d88d2e3017e6647c99026621e8c9d99e620aa8c",
+  "branch": "candidate/adsl-immersive-lab-v03",
+  "scope": "additive static-frontend candidate; fixture data only",
+  "tests": {
+    "node": { "passed": 112, "failed": 0 },
+    "chromiumSmoke": {
+      "passed": 41, "failed": 0,
+      "mode": "in-memory standalone; HTTP navigation blocked by environment policy",
+      "browser": "Chromium 144.0.7559.96"
+    },
+    "shaderCompilation": "NOT_PERFORMED",
+    "wcagAudit": "NOT_PERFORMED",
+    "targetDevicePerformance": "NOT_PERFORMED",
+    "independentVerification": "NOT_PERFORMED"
+  },
+  "deployment": {
+    "hosted": "NOT_PERFORMED",
+    "authorization": "NOT_ESTABLISHED",
+    "providerAccess": "Lovable workspace OAuth 403; Vercel not connected",
+    "release": "HELD"
+  },
+  "canonicalRegistryWrites": false,
+  "acceptance": "NOT_GRANTED",
+  "authorityEffect": "NONE"
+}

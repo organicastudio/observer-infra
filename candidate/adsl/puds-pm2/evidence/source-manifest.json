@@ -1,0 +1,12 @@
+{
+  "scope": "static-frontend-source",
+  "algorithm": "SHA-256",
+  "artifactDigest": "25640d92743c73241cd6f5ec8b482a074cae97ec4267f5b605df2a5e13bc07f9",
+  "files": [
+    {"file":"index.html","bytes":9616,"sha256":"f998d81ac68a3be5b9675b2cbce1e0991c1dfa92d93e04c053f4965407b5bfd7"},
+    {"file":"tokens.css","bytes":10679,"sha256":"28303eb9c3fac42c605b90a57314f792dbf125616c502c6a746242ac7e1124ae"},
+    {"file":"core.js","bytes":8278,"sha256":"1364e6e66bf013bb933c3a94563b4e319943e6e13a18a2a670e063541c15141e"},
+    {"file":"runtime.js","bytes":18648,"sha256":"f7cff0521777efa7fbada9e464a5ac233806045762efcf1eb65e1d35edacca2d"}
+  ],
+  "productionAuthorized": false
+}
